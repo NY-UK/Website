@@ -225,7 +225,7 @@ function loadDeals() {
         card.classList.add("deal-product-card");
 
         card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
+            <img src="../images/${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <div class="deal-product-prices">
                 <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
