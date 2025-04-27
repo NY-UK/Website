@@ -22,13 +22,13 @@
             <a href="checkout.html">Checkout</a>
         </nav>
 
-        <button class="menu-toggle" id="menu-toggle">☰</button>
-
         <div class="cart-icon">
             <a href="#" id="cart-button">
                 🛒 Cart (<span id="cart-count">0</span>)
             </a>
         </div>
+
+        <button class="menu-toggle" id="menu-toggle">☰</button>
     </div>
 </header>
 
@@ -37,9 +37,24 @@
     <div class="container">
         <h2>🔥 Deal of the Day 🔥</h2>
         <div id="deal-countdown">Time left: 00:00:00</div>
-        <div class="deal-products">
-            <!-- Deals will load here dynamically -->
+	
+<div class="deal-carousel">
+<div class="deal-carousel-wrapper">
+    <button id="prevDeal" class="carousel-button">←</button>
+
+    <div class="deal-carousel">
+        <div class="deal-of-the-day" id="deal-container">
+            <!-- 3 x .deal-item cards here -->
         </div>
+    </div>
+
+    <button id="nextDeal" class="carousel-button">→</button>
+</div>
+<div class="deal-dots" id="deal-dots"></div>
+</div>
+
+
+
     </div>
 </section>
 
