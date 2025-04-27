@@ -6,8 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             products = data;
             displayProducts(products);
+
+		/*
             loadDealOfTheDay();
             startCountdownTimer();
+		*/
+	    loadDeals();
+	    startCountdown(5); // 5-hour countdown
         })
         .catch(error => console.error('Error loading products:', error));
 
@@ -73,6 +78,7 @@ productItem.innerHTML = `
         productGrid.appendChild(productItem);
     });
 }
+
 
 function loadDealOfTheDay() {
     const dealProduct = products.find(p => p.sale_price); // Pick first item on sale
@@ -183,3 +189,72 @@ window.addEventListener('scroll', function() {
         header.classList.remove('shrink');
     }
 });
+
+
+const deals = [
+    {
+        id: 1,
+        name: "All-Terrain Survival Tent",
+        originalPrice: 199.99,
+        dealPrice: 149.99,
+        image: "tent.jpg"
+    },
+    {
+        id: 2,
+        name: "Carbon Steel Survival Knife",
+        originalPrice: 89.99,
+        dealPrice: 59.99,
+        image: "knife.jpg"
+    },
+    {
+        id: 3,
+        name: "Emergency First Aid Kit",
+        originalPrice: 49.99,
+        dealPrice: 29.99,
+        image: "firstaid.jpg"
+    }
+];
+
+// Render Deal Products
+function loadDeals() {
+    const dealContainer = document.querySelector(".deal-products");
+    dealContainer.innerHTML = "";
+
+    deals.forEach(product => {
+        const card = document.createElement("div");
+        card.classList.add("deal-product-card");
+
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <div class="deal-product-prices">
+                <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
+                <span class="deal-price">$${product.dealPrice.toFixed(2)}</span>
+            </div>
+            <button onclick="addToCart(${product.id}, '${product.name}', ${product.dealPrice})">Add to Cart</button>
+        `;
+
+        dealContainer.appendChild(card);
+    });
+}
+
+// Countdown Timer
+function startCountdown(hours = 5) {
+    const countdownEl = document.getElementById("deal-countdown");
+    let timeLeft = hours * 60 * 60; // in seconds
+
+    const timer = setInterval(() => {
+        const hoursLeft = Math.floor(timeLeft / 3600);
+        const minutesLeft = Math.floor((timeLeft % 3600) / 60);
+        const secondsLeft = timeLeft % 60;
+
+        countdownEl.textContent = `Time left: ${String(hoursLeft).padStart(2,'0')}:${String(minutesLeft).padStart(2,'0')}:${String(secondsLeft).padStart(2,'0')}`;
+
+        timeLeft--;
+
+        if (timeLeft < 0) {
+            clearInterval(timer);
+            countdownEl.textContent = "Deal expired!";
+        }
+    }, 1000);
+}
