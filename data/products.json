@@ -6,7 +6,7 @@
         "price": 89.99,
         "sale_price": 69.99,
         "featured": true,
-        "image_url": "images/survival-knife.JPG",
+        "image_url": "images/survival-knife.jpg",
         "category": "Knives"
     },
     {
@@ -16,7 +16,7 @@
         "price": 149.99,
         "sale_price": null,
         "featured": false,
-        "image_url": "images/tent.JPG",
+        "image_url": "images/tent.jpg",
         "category": "Tents"
     },
     {
@@ -26,7 +26,7 @@
         "price": 29.99,
         "sale_price": 19.99,
         "featured": false,
-        "image_url": "images/firestarter.JPG",
+        "image_url": "images/firestarter.jpg",
         "category": "Fire Starters"
     },
     {
@@ -36,7 +36,7 @@
         "price": 49.99,
         "sale_price": null,
         "featured": true,
-        "image_url": "images/shovel.JPG",
+        "image_url": "images/shovel.jpg",
         "category": "Tools"
     }
 ]

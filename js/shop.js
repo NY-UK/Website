@@ -57,18 +57,18 @@ function displayProducts(productsToDisplay) {
             ? `<p><span class="old-price">$${product.price.toFixed(2)}</span> <strong>$${product.sale_price.toFixed(2)}</strong></p>`
             : `<p><strong>$${product.price.toFixed(2)}</strong></p>`;
 
-        productItem.innerHTML = `
-            <div class="image-container">
-                ${badges}
-                <img src="${product.image_url}" alt="${product.name}">
-            </div>
-            <div class="info">
-                <h3>${product.name}</h3>
-                <p>${product.description}</p>
-                ${priceHTML}
-                <a href="#" class="btn-primary">View Details</a>
-            </div>
-        `;
+productItem.innerHTML = `
+    <div class="image-container">
+        ${badges}
+        <img src="${product.image_url}" alt="${product.name}">
+    </div>
+    <div class="info">
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+        ${priceHTML}
+        <button class="btn-primary add-to-cart" data-id="${product.id}">Add to Cart</button>
+    </div>
+`;
 
         productGrid.appendChild(productItem);
     });
@@ -111,3 +111,66 @@ function startCountdownTimer() {
     setInterval(updateTimer, 1000);
 }
 
+
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+document.addEventListener('click', function(event) {
+    if (event.target.classList.contains('add-to-cart')) {
+        const id = parseInt(event.target.getAttribute('data-id'));
+        addToCart(id);
+    } else if (event.target.id === 'cart-button') {
+        toggleCart();
+    } else if (event.target.id === 'close-cart') {
+        toggleCart();
+    } else if (event.target.classList.contains('remove-item')) {
+        const index = parseInt(event.target.getAttribute('data-index'));
+        removeFromCart(index);
+    }
+});
+
+function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    if (!product) return;
+
+    cart.push(product);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartDisplay();
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartDisplay();
+}
+
+function updateCartDisplay() {
+    const cartCount = document.getElementById('cart-count');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+
+    cartCount.textContent = cart.length;
+
+    cartItems.innerHTML = '';
+    let total = 0;
+
+cart.forEach((item, index) => {
+    const price = item.sale_price || item.price;
+    total += price;
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+        ${item.name} - $${price.toFixed(2)} 
+        <button class="remove-item" data-index="${index}">❌</button>
+    `;
+    cartItems.appendChild(li);
+});
+
+    cartTotal.textContent = total.toFixed(2);
+}
+
+function toggleCart() {
+    document.getElementById('mini-cart').classList.toggle('hidden');
+}
+
+// Initialize cart display at load
+updateCartDisplay();

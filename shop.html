@@ -11,7 +11,10 @@
     <!-- Header -->
     <header class="main-header">
         <div class="container">
-            <h1>Wild Edge Supply</h1>
+<a href="/" title="Return to the homepage" id="logo">
+  <img src="../images/WildEdgeSupplies.png" alt="Wild Edge Supply" />
+</a>
+
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -21,6 +24,13 @@
                 </ul>
             </nav>
         </div>
+
+<div class="cart-icon">
+    <a href="#" id="cart-button">
+        🛒 Cart (<span id="cart-count">0</span>)
+    </a>
+</div>
+
     </header>
 
 <!-- Deal of the Day -->
@@ -73,6 +83,14 @@
             <p>&copy; 2025 Wild Edge Supply. All rights reserved.</p>
         </div>
     </footer>
+
+<!-- Mini Cart Popup -->
+<div id="mini-cart" class="mini-cart hidden">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total:</strong> $<span id="cart-total">0.00</span></p>
+    <button id="close-cart" class="btn-primary">Close</button>
+</div>
 
     <script src="js/shop.js"></script>
 </body>

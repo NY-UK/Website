@@ -22,6 +22,7 @@ body {
 /* Header */
 .main-header {
     background-color: #228B22; /* Forest Green */
+    background-image: url('../images/header-shade.png');
     color: #fff;
     padding: 20px 0;
 }
@@ -227,4 +228,48 @@ nav a {
 
 #timer {
     font-weight: bold;
+}
+
+/* Cart Icon */
+.cart-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+}
+.cart-icon a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Mini Cart Popup */
+.mini-cart {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 300px;
+    background: #f1f8e9;
+    border: 1px solid #c5e1a5;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 999;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.mini-cart.hidden {
+    display: none;
+}
+
+.mini-cart h3 {
+    margin-top: 0;
+}
+
+.mini-cart ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.mini-cart ul li {
+    margin-bottom: 10px;
 }
