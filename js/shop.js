@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('categoryFilter').addEventListener('change', applyFilters);
     document.getElementById('sortFilter').addEventListener('change', applyFilters);
+
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const navLinks = document.getElementById('nav-links');
+    menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+    });
 });
 
 
@@ -132,6 +139,8 @@ document.addEventListener('click', function(event) {
         const index = parseInt(event.target.getAttribute('data-index'));
         removeFromCart(index);
     }
+
+
 });
 
 function addToCart(id) {
