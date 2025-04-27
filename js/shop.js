@@ -197,21 +197,21 @@ const deals = [
         name: "All-Terrain Survival Tent",
         originalPrice: 199.99,
         dealPrice: 149.99,
-        image: "tent.jpg"
+        image: "images/tent.JPG"
     },
     {
         id: 2,
         name: "Carbon Steel Survival Knife",
         originalPrice: 89.99,
         dealPrice: 59.99,
-        image: "knife.jpg"
+        image: "images/survival-knife.JPG"
     },
     {
         id: 3,
-        name: "Emergency First Aid Kit",
+        name: "Fire Starters Kit",
         originalPrice: 49.99,
         dealPrice: 29.99,
-        image: "firstaid.jpg"
+        image: "images/firestarter.JPG"
     }
 ];
 
@@ -225,7 +225,7 @@ function loadDeals() {
         card.classList.add("deal-product-card");
 
         card.innerHTML = `
-            <img src="../images/${product.image}" alt="${product.name}">
+            <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <div class="deal-product-prices">
                 <span class="original-price">$${product.originalPrice.toFixed(2)}</span>
