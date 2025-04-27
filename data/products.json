@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Titanium Survival Knife",
+        "description": "Ultra-lightweight and unbreakable survival knife.",
+        "price": 89.99,
+        "sale_price": 69.99,
+        "featured": true,
+        "image_url": "images/survival-knife.jpg",
+        "category": "Knives"
+    },
+    {
+        "id": 2,
+        "name": "All-Weather Tent",
+        "description": "Four-season compact tent for extreme conditions.",
+        "price": 149.99,
+        "sale_price": null,
+        "featured": false,
+        "image_url": "images/tent.jpg",
+        "category": "Tents"
+    },
+    {
+        "id": 3,
+        "name": "Firestarter Kit",
+        "description": "Reliable sparks in any weather, waterproof casing.",
+        "price": 29.99,
+        "sale_price": 19.99,
+        "featured": false,
+        "image_url": "images/firestarter.jpg",
+        "category": "Fire Starters"
+    },
+    {
+        "id": 4,
+        "name": "Compact Folding Shovel",
+        "description": "Essential multi-use survival shovel.",
+        "price": 49.99,
+        "sale_price": null,
+        "featured": true,
+        "image_url": "images/shovel.jpg",
+        "category": "Tools"
+    }
+]

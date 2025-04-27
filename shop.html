@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wild Edge Supply - Shop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <h1>TrailForge</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<!-- Deal of the Day -->
+<section class="deal-of-the-day">
+    <div class="container">
+        <h2>🔥 Deal of the Day 🔥</h2>
+        <div class="deal-product" id="deal-product">
+            <!-- Deal Product will load here -->
+        </div>
+        <div class="countdown" id="countdown-timer">
+            Offer ends in: <span id="timer"></span>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Shop Filters -->
+    <section class="shop-filters">
+        <div class="container">
+            <h2>Shop Gear</h2>
+            <div class="filters">
+                <select id="categoryFilter">
+                    <option value="All">All Categories</option>
+                    <option value="Knives">Knives</option>
+                    <option value="Tents">Tents</option>
+                    <option value="Fire Starters">Fire Starters</option>
+                    <option value="Tools">Tools</option>
+                </select>
+
+                <select id="sortFilter">
+                    <option value="name">Sort by Name</option>
+                    <option value="price">Sort by Price</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="product-grid" id="product-grid">
+                <!-- Products will load here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 TrailForge. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/shop.js"></script>
+</body>
+</html>
