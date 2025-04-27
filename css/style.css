@@ -14,9 +14,10 @@ body {
 
 /* Container */
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 /* Header */
@@ -45,6 +46,10 @@ body {
 }
 
 /* Logo Size Normal */
+.logo {
+    flex: 1;
+}
+
 #logo-img {
     height: 50px;
     transition: all 0.3s ease;
@@ -66,6 +71,15 @@ body {
     height: 50px;
 }
 
+.nav-links {
+    right: 0;
+    left: 0;
+    width: auto;
+    text-align: center;
+
+    z-index: 2; /* Nav links layer under cart and menu */
+}
+
 .nav-links a {
     margin: 0 15px;
     text-decoration: none;
@@ -78,6 +92,10 @@ body {
 }
 
 .cart-icon {
+    flex: 0;
+    position: relative;
+    z-index: 3; /* Always on top */
+
     font-size: 18px;
 }
 
@@ -394,6 +412,8 @@ nav a {
     font-size: 2rem;
     cursor: pointer;
     color: #2e7d32;
+
+    z-index: 4; /* Make sure hamburger is above everything */
 }
 
 /* Mobile Styles */
@@ -403,7 +423,7 @@ nav a {
         flex-direction: column;
         background: #f1f8e9;
         position: absolute;
-        top: 70px; /* under the header */
+        top: 70px;
         right: 10px;
         width: 200px;
         padding: 20px;
@@ -413,13 +433,5 @@ nav a {
 
     .nav-links.active {
         display: flex;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .container {
-        position: relative;
     }
 }
