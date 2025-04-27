@@ -20,16 +20,72 @@ body {
 }
 
 /* Header */
+/* Sticky Header */
 .main-header {
-    background-color: #228B22; /* Forest Green */
-    background-image: url('../images/header-shade.png');
-    color: #fff;
+    position: sticky;
+    top: 0;
+    background: #e8f5e9; /* light green outdoorsy feel */
     padding: 20px 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    z-index: 1000;
 }
 
-.main-header h1 {
-    margin-bottom: 10px;
+.main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
+
+/* Normal Header State */
+.main-header {
+    transition: all 0.3s ease;
+}
+
+/* Logo Size Normal */
+#logo-img {
+    height: 50px;
+    transition: all 0.3s ease;
+}
+
+/* Shrinked Header when Scrolled */
+.main-header.shrink {
+    padding: 5px 0;
+    background: #c8e6c9; /* slightly darker green when shrinked */
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.main-header.shrink #logo-img {
+    height: 35px;
+}
+
+
+.logo img {
+    height: 50px;
+}
+
+.nav-links a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #33691e;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.cart-icon {
+    font-size: 18px;
+}
+
+.cart-icon a {
+    text-decoration: none;
+    color: #2e7d32;
+}
+
 
 nav ul {
     list-style: none;
@@ -233,12 +289,10 @@ nav a {
 /* Cart Icon */
 .cart-icon {
     position: absolute;
-    top: 20px;
     right: 20px;
-    font-size: 20px;
+    font-size: 14px;
 }
 .cart-icon a {
-    color: #fff;
     text-decoration: none;
 }
 
@@ -246,7 +300,7 @@ nav a {
 .mini-cart {
     position: fixed;
     top: 80px;
-    right: 20px;
+    right: 10px;
     width: 300px;
     background: #f1f8e9;
     border: 1px solid #c5e1a5;
