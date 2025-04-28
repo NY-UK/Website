@@ -138,6 +138,37 @@ nav a {
 	margin-bottom: 10px;
 }
 
+.badge {
+     position: absolute;
+     top: 10px;
+     left: 10px;
+     background-color: #388e3c;
+     color: white;
+     padding: 5px 10px;
+     border-radius: 5px;
+     font-size: 12px;
+ }
+
+.badge.sale {
+     background-color: #e53935; /* Red for urgency */
+ }
+ 
+ .badge.featured {
+     background-color: #fb8c00; /* Bright orange for attention */
+ }
+
+.image-container {
+     position: relative;
+ }
+ 
+ /* Old Price Style */
+ .old-price {
+     text-decoration: line-through;
+     color: #888;
+     margin-right: 10px;
+ }
+
+
 .main-footer {
 	background-color: #333;
 	color: #ccc;
