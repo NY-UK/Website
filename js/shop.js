@@ -185,7 +185,7 @@ function toggleCart() {
 // DEALS SECTION
 //--------------------------------------
 function loadDeals() {
-    const dealContainer = document.querySelector('.deal-products');
+    const dealContainer = document.querySelector('.deal-of-the-day');
     dealContainer.innerHTML = '';
 
     deals.forEach(deal => {
