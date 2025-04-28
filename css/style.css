@@ -15,6 +15,10 @@ body {
 	width: 90%;
 	max-width: 1200px;
 	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 20px;
 }
 
 .main-header {
@@ -24,18 +28,6 @@ body {
 	padding: 20px 0;
 	box-shadow: 0 2px 6px rgba(0,0,0,.15);
 	z-index: 1000;
-}
-
-.main-header .container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 0 20px;
-}
-
-.main-header {
 	transition: all .3s ease;
 }
 
@@ -45,7 +37,7 @@ body {
 }
 
 .logo {
-	flex: 1;
+	flex-shrink: 0;
 }
 
 .logo img {
@@ -53,10 +45,11 @@ body {
 }
 
 .nav-links {
-    flex: 2;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+	display: flex;
+	gap: 20px;
+	flex: 1;
+	justify-content: center;
+	align-items: center;
 }
 
 .nav-links a {
@@ -72,6 +65,7 @@ body {
 
 .cart-icon {
 	font-size: 18px;
+	margin-left: 10px;
 }
 
 .cart-icon a {
@@ -80,7 +74,7 @@ body {
 }
 
 .cart-icon, .menu-toggle {
-    flex-shrink: 0;
+	flex-shrink: 0;
 }
 
 nav ul {
@@ -280,34 +274,21 @@ nav a {
 }
 
 .menu-toggle {
-	display: none;
-	background: 0 0;
+	background: none;
 	border: none;
 	font-size: 2rem;
 	cursor: pointer;
 	color: #2e7d32;
+	display: none; /* hide by default */
 }
 
 @media (max-width:768px) {
 	.nav-links {
 		display: none;
-		flex-direction: column;
-		background: #f1f8e9;
-		position: absolute;
-		top: 70px;
-		right: 10px;
-		width: 200px;
-		padding: 20px;
-		border-radius: 8px;
-		box-shadow: 0 2px 10px rgba(0,0,0,.2);
 	}
 
 	.menu-toggle {
 		display: block;
-	}
-
-	.container {
-		position: relative;
 	}
 }
 
