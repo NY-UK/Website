@@ -5,27 +5,9 @@ let products = [];
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 const deals = [
-    {
-        id: 1,
-        name: "All-Terrain Survival Tent",
-        originalPrice: 199.99,
-        dealPrice: 149.99,
-        image: "images/tent.JPG"
-    },
-    {
-        id: 2,
-        name: "Carbon Steel Survival Knife",
-        originalPrice: 89.99,
-        dealPrice: 59.99,
-        image: "images/survival-knife.JPG"
-    },
-    {
-        id: 3,
-        name: "Fire Starters Kit",
-        originalPrice: 49.99,
-        dealPrice: 29.99,
-        image: "images/firestarter.JPG"
-    }
+    { id: 1, name: "All-Terrain Survival Tent", originalPrice: 199.99, dealPrice: 149.99, image: "images/tent.JPG" },
+    { id: 2, name: "Carbon Steel Survival Knife", originalPrice: 89.99, dealPrice: 59.99, image: "images/survival-knife.JPG" },
+    { id: 3, name: "Fire Starters Kit", originalPrice: 49.99, dealPrice: 29.99, image: "images/firestarter.JPG" }
 ];
 
 //--------------------------------------
@@ -33,8 +15,11 @@ const deals = [
 //--------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
-    setupEventListeners();
+    setupFilters();
+    setupMenuToggle();
+    setupCartButtonHandlers();
     updateCartDisplay();
+    setupScrollShrink();
 });
 
 //--------------------------------------
@@ -53,40 +38,45 @@ function loadProducts() {
 }
 
 //--------------------------------------
-// EVENT LISTENERS
+// SETUP EVENT LISTENERS
 //--------------------------------------
-function setupEventListeners() {
+function setupFilters() {
     document.getElementById('categoryFilter').addEventListener('change', applyFilters);
     document.getElementById('sortFilter').addEventListener('change', applyFilters);
+}
 
+function setupMenuToggle() {
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
+
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
+}
 
-    document.addEventListener('click', handleDocumentClick);
-    
+function setupCartButtonHandlers() {
+    document.addEventListener('click', (event) => {
+        if (event.target.classList.contains('add-to-cart')) {
+            const id = parseInt(event.target.getAttribute('data-id'));
+            addToCart(id);
+        } else if (event.target.id === 'cart-button' || event.target.id === 'close-cart') {
+            toggleCart();
+        } else if (event.target.classList.contains('remove-item')) {
+            const index = parseInt(event.target.getAttribute('data-index'));
+            removeFromCart(index);
+        }
+    });
+}
+
+function setupScrollShrink() {
     window.addEventListener('scroll', () => {
         const header = document.getElementById('main-header');
         header.classList.toggle('shrink', window.scrollY > 50);
     });
 }
 
-function handleDocumentClick(event) {
-    if (event.target.classList.contains('add-to-cart')) {
-        const id = parseInt(event.target.getAttribute('data-id'));
-        addToCart(id);
-    } else if (event.target.id === 'cart-button' || event.target.id === 'close-cart') {
-        toggleCart();
-    } else if (event.target.classList.contains('remove-item')) {
-        const index = parseInt(event.target.getAttribute('data-index'));
-        removeFromCart(index);
-    }
-}
-
 //--------------------------------------
-// FILTERING AND SORTING
+// FILTERING PRODUCTS
 //--------------------------------------
 function applyFilters() {
     const category = document.getElementById('categoryFilter').value;
@@ -108,7 +98,7 @@ function applyFilters() {
 }
 
 //--------------------------------------
-// PRODUCT DISPLAY
+// DISPLAY PRODUCTS
 //--------------------------------------
 function displayProducts(productsToDisplay) {
     const productGrid = document.getElementById('product-grid');
@@ -118,15 +108,16 @@ function displayProducts(productsToDisplay) {
         const productItem = document.createElement('div');
         productItem.className = 'product-item';
 
-        let badges = '';
-        if (product.featured) badges += '<span class="badge featured">Featured</span>';
-        if (product.sale_price) badges += '<span class="badge sale">Flash Sale!</span>';
+        const badges = `
+            ${product.featured ? `<span class="badge featured">Featured</span>` : ''}
+            ${product.sale_price ? `<span class="badge sale">Flash Sale!</span>` : ''}
+        `;
 
-        const priceHTML = product.sale_price 
-            ? '<p><span class="old-price">$${product.price.toFixed(2)}</span> <strong>$${product.sale_price.toFixed(2)}</strong></p>'
-            : '<p><strong>$${product.price.toFixed(2)}</strong></p>';
+        const priceHTML = product.sale_price
+            ? `<p><span class="old-price">$${product.price.toFixed(2)}</span> <strong>$${product.sale_price.toFixed(2)}</strong></p>`
+            : `<p><strong>$${product.price.toFixed(2)}</strong></p>`;
 
-        productItem.innerHTML = '
+        productItem.innerHTML = `
             <div class="image-container">
                 ${badges}
                 <img src="${product.image_url}" alt="${product.name}">
@@ -137,14 +128,14 @@ function displayProducts(productsToDisplay) {
                 ${priceHTML}
                 <button class="btn-primary add-to-cart" data-id="${product.id}">Add to Cart</button>
             </div>
-        ';
+        `;
 
         productGrid.appendChild(productItem);
     });
 }
 
 //--------------------------------------
-// CART FUNCTIONS
+// CART MANAGEMENT
 //--------------------------------------
 function addToCart(id) {
     const product = products.find(p => p.id === id) || deals.find(d => d.id === id);
@@ -170,15 +161,16 @@ function updateCartDisplay() {
     cartItems.innerHTML = '';
 
     let total = 0;
+
     cart.forEach((item, index) => {
         const price = item.sale_price || item.dealPrice || item.price;
         total += price;
 
         const li = document.createElement('li');
-        li.innerHTML = '
+        li.innerHTML = `
             ${item.name} - $${price.toFixed(2)}
             <button class="remove-item" data-index="${index}">❌</button>
-        ';
+        `;
         cartItems.appendChild(li);
     });
 
@@ -200,15 +192,15 @@ function loadDeals() {
         const card = document.createElement('div');
         card.className = 'deal-product-card';
 
-        card.innerHTML = '
+        card.innerHTML = `
             <img src="${deal.image}" alt="${deal.name}">
             <h3>${deal.name}</h3>
             <div class="deal-product-prices">
                 <span class="original-price">$${deal.originalPrice.toFixed(2)}</span>
                 <span class="deal-price">$${deal.dealPrice.toFixed(2)}</span>
             </div>
-            <button onclick="addToCart(${deal.id})">Add to Cart</button>
-        ';
+            <button class="btn-primary add-to-cart" data-id="${deal.id}">Add to Cart</button>
+        `;
 
         dealContainer.appendChild(card);
     });
@@ -226,7 +218,7 @@ function startCountdown(hours = 5) {
         const minutesLeft = Math.floor((timeLeft % 3600) / 60);
         const secondsLeft = timeLeft % 60;
 
-        countdownEl.textContent = 'Time left: ${String(hoursLeft).padStart(2, '0')}:${String(minutesLeft).padStart(2, '0')}:${String(secondsLeft).padStart(2, '0')}';
+        countdownEl.textContent = `Time left: ${String(hoursLeft).padStart(2, '0')}:${String(minutesLeft).padStart(2, '0')}:${String(secondsLeft).padStart(2, '0')}`;
         timeLeft--;
 
         if (timeLeft < 0) {
