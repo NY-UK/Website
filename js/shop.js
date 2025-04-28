@@ -15,11 +15,14 @@ const deals = [
 //--------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
+
     setupFilters();
     setupMenuToggle();
     setupCartButtonHandlers();
     updateCartDisplay();
     setupScrollShrink();
+
+    setupDealCarousel();
 });
 
 //--------------------------------------
@@ -226,4 +229,60 @@ function startCountdown(hours = 5) {
             countdownEl.textContent = "Deal expired!";
         }
     }, 1000);
+}
+
+//--------------------------------------
+// CAROUSEL STUFF
+//--------------------------------------
+function setupDealCarousel() {
+    const dealContainer = document.getElementById('deal-container');
+    const dealDots = document.getElementById('deal-dots');
+    const prevButton = document.getElementById('prevDeal');
+    const nextButton = document.getElementById('nextDeal');
+
+    let currentDeal = 0;
+
+    function updateCarousel() {
+        const deals = document.querySelectorAll('#deal-container .deal-item');
+        const offset = currentDeal * -100;
+        dealContainer.style.transform = `translateX(${offset}%)`;
+
+        // Update dots
+        const dots = document.querySelectorAll('.deal-dot');
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[currentDeal]) {
+            dots[currentDeal].classList.add('active');
+        }
+    }
+
+    function createDots() {
+        const deals = document.querySelectorAll('#deal-container .deal-item');
+        dealDots.innerHTML = '';
+        deals.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.classList.add('deal-dot');
+            if (idx === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentDeal = idx;
+                updateCarousel();
+            });
+            dealDots.appendChild(dot);
+        });
+    }
+
+    prevButton.addEventListener('click', () => {
+        const deals = document.querySelectorAll('#deal-container .deal-item');
+        currentDeal = (currentDeal - 1 + deals.length) % deals.length;
+        updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+        const deals = document.querySelectorAll('#deal-container .deal-item');
+        currentDeal = (currentDeal + 1) % deals.length;
+        updateCarousel();
+    });
+
+    // Initialize carousel right away:
+    createDots();
+    updateCarousel();
 }

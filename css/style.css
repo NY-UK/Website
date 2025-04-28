@@ -371,8 +371,16 @@ nav a {
 
 
 
+.deal-of-the-day {
+	display: flex;
+	transition: transform 0.5s ease;
+	width: 300%; /* assuming 3 items; otherwise make dynamic */
+}
 
-
+.deal-item {
+	min-width: 100%; /* Each deal item takes full view */
+	box-sizing: border-box;
+}
 
 
 .deal-dots {
