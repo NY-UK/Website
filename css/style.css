@@ -44,8 +44,19 @@ body {
 	transition: all .3s ease;
 }
 
+.logo {
+	flex: 1;
+}
+
 .logo img {
 	height: 50px;
+}
+
+.nav-links {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 .nav-links a {
@@ -66,6 +77,10 @@ body {
 .cart-icon a {
 	text-decoration: none;
 	color: #2e7d32;
+}
+
+.cart-icon, .menu-toggle {
+    flex-shrink: 0;
 }
 
 nav ul {
